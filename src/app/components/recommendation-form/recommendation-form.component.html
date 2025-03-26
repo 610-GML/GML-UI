@@ -1,0 +1,35 @@
+<div class="mat-container">
+    <div class="header">
+        <img src="assets/peopleIcon.svg" alt="Icon" class="header-icon" />
+        <h1>Employee Connection Recommendation</h1>
+    </div>
+  
+    <div class="form-row">
+      <mat-form-field appearance="outline">
+        <mat-label>Select Employee</mat-label>
+        <mat-select [(ngModel)]="selectedEmployee">
+          <mat-option *ngFor="let employee of employees" [value]="employee">
+            {{employee}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" (click)="recommend()">
+        Recommend Team Member
+      </button>
+    </div>
+  
+    <h3>Recommended employee connections</h3>
+  
+    <mat-card *ngFor="let emp of recommendations" class="recommendation-card">
+      <div class="card-content">
+        <img mat-card-avatar src="https://via.placeholder.com/80" alt="{{emp.name}}" />
+        <div class="details">
+          <mat-card-title>{{emp.name}}</mat-card-title>
+          <mat-card-content>{{emp.desc}}</mat-card-content>
+          <button mat-stroked-button color="accent">View Profile</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+  

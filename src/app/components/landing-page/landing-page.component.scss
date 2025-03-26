@@ -1,0 +1,27 @@
+.landing-container {
+    height: 100vh;
+    //background: url('your-background-image.jpg') no-repeat center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  
+    h1, h3 {
+      text-align: center;
+      color: #222;
+    }
+  
+    button {
+      padding: 10px 20px;
+      border-radius: 6px;
+      background-color: #ccc;
+      border: none;
+      cursor: pointer;
+      &:hover {
+        background-color: #bbb;
+      }
+    }
+  }
+  
