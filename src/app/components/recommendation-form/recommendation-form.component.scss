@@ -1,63 +1,135 @@
-.mat-container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-  
-    .header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 20px;
-  
-      mat-icon {
-        font-size: 40px;
-        color: #555;
-      }
-  
-      h2 {
-        font-weight: 500;
-      }
+:host {
+  display: block;
+  background-color: #f7f8fa; // Light full-page background
+  min-height: 100vh;
+  padding: 40px 0;
+}
+
+.recommendation-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px;
+}
+
+/* Header Card */
+.recommendation-header {
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+  padding: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Icon + Title Row */
+.header-top {
+  display: flex;
+  align-items: center;
+
+  .header-icon {
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+  }
+
+  .header-text {
+    h2 {
+      margin: 0;
+      font-size: 1.6rem;
+      color: #3973b5;
     }
-  
-    .form-row {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
-  
-      mat-form-field {
-        flex: 1;
-      }
-    }
-  
-    .recommendation-card {
-      margin-bottom: 15px;
-      padding: 15px;
-  
-      .card-content {
-        display: flex;
-        align-items: center;
-        gap: 15px;
-  
-        img {
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-        }
-  
-        .details {
-          flex: 1;
-  
-          mat-card-title {
-            margin-bottom: 8px;
-          }
-  
-          mat-card-content {
-            margin-bottom: 10px;
-            color: #666;
-          }
-        }
-      }
+
+    p {
+      margin: 4px 0 0;
+      color: #666;
+      font-size: 0.95rem;
     }
   }
+}
+
+/* Form Row */
+.recommendation-form {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    flex: 1;
+    border-radius: 8px;
+
+    ::ng-deep .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    
+  }
+
+  .recommend-button {
+    background: linear-gradient(to right, #4f8dfc, #2a6cd3);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-weight: 500;
+    height: 56px; 
+    min-width: 180px;
+    align-self: flex-start;
+  }
+}
+
+/* Section Title */
+.section-subtitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+/* Recommendation Cards */
+.recommendation-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  padding: 15px;
+
+  mat-card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  mat-card-subtitle {
+    color: #555;
+    margin-bottom: 8px;
+  }
+
+  mat-card-content {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  .score-chip {
+    font-size: 0.8rem;
+  }
+}
+:host {
+  ::ng-deep .mat-mdc-form-field .mat-mdc-text-field-wrapper {
+    background-color: #f7f8fa !important; // light grey input
+    border-radius: 8px;
+    border: 1px solid #dcdfe4 !important;
+  }
+  ::ng-deep .mat-mdc-form-field .mdc-line-ripple {
+    display: none !important;
+  }
+  :ng-deep .cdk-overlay-container .mdc-menu-surface {
+    background-color: #f7f8fa !important;
+    color: #333 !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+  }
   
+}

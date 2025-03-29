@@ -1,35 +1,48 @@
-<div class="mat-container">
-    <div class="header">
-        <img src="assets/peopleIcon.svg" alt="Icon" class="header-icon" />
-        <h1>Employee Connection Recommendation</h1>
+<div class="recommendation-container">
+
+  <mat-card class="recommendation-header">
+    <div class="header-top">
+      <img src="assets/peopleIcon.svg" alt="icon" class="header-icon" />
+      <div class="header-text">
+        <h2>Employee Connection Recommendation</h2>
+        <p>Discover recommended employee connections based on shared roles and skills</p>
+      </div>
     </div>
-  
-    <div class="form-row">
-      <mat-form-field appearance="outline">
+
+    <form class="recommendation-form">
+      <mat-form-field appearance="fill">
         <mat-label>Select Employee</mat-label>
-        <mat-select [(ngModel)]="selectedEmployee">
-          <mat-option *ngFor="let employee of employees" [value]="employee">
-            {{employee}}
+        <mat-select [(ngModel)]="selectedEmployeeId" name="employee">
+          <mat-option *ngFor="let emp of employees" [value]="emp.employee_id">
+            {{ emp.employee_name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
-      <button mat-raised-button color="primary" (click)="recommend()">
-        Recommend Team Member
+
+      <button mat-flat-button color="primary" class="recommend-button" (click)="getRecommendations()">
+        Get Recommendations
       </button>
-    </div>
-  
-    <h3>Recommended employee connections</h3>
-  
+    </form>
+  </mat-card>
+
+  <!-- Recommendations Section -->
+  <div *ngIf="recommendations.length > 0">
+    <h3 class="section-subtitle">Recommended Employee Connections</h3>
+
     <mat-card *ngFor="let emp of recommendations" class="recommendation-card">
-      <div class="card-content">
-        <img mat-card-avatar src="https://via.placeholder.com/80" alt="{{emp.name}}" />
-        <div class="details">
-          <mat-card-title>{{emp.name}}</mat-card-title>
-          <mat-card-content>{{emp.desc}}</mat-card-content>
-          <button mat-stroked-button color="accent">View Profile</button>
-        </div>
-      </div>
+      <mat-card-title>
+        {{ emp.employee_name }}
+        <mat-chip color="primary" class="score-chip" selected>
+          Score: {{ emp.similarity_score | number: '1.2-2' }}
+        </mat-chip>
+      </mat-card-title>
+      <!-- <mat-card-subtitle>{{ emp.employee_title }} - {{ emp.labour_category }}</mat-card-subtitle> -->
+      <mat-card-subtitle>
+        {{ emp.employee_title | titlecase }} - {{ emp.labour_category }}
+      </mat-card-subtitle>      
+      <mat-card-content>
+        <strong>Skills:</strong> {{ emp.skills }}
+      </mat-card-content>
     </mat-card>
   </div>
-  
+</div>

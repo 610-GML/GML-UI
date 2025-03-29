@@ -1,7 +1,14 @@
-<div class="landing-container">
-    <h1>Graph Machine Learning</h1>
-    <h3>Exploring ML Algorithms in a Project Time-Tracking Database</h3>
+<mat-card class="landing-container">
+    <div class="header">
+      <div>
+        <h1>Graph Machine Learning</h1>
+        <p>Exploring ML Algorithms in a Project Time-Tracking Database</p>
+      </div>
+    </div>
   
-    <button routerLink="/recommendation-form">Team Recommendation</button>
-    <button [routerLink]="['/recommendation-form']">Employee Connection</button>  </div>
+    <div class="button-group">
+      <button mat-raised-button color="primary" routerLink="/team-recommendation">Team Recommendation</button>
+      <button mat-raised-button color="primary" routerLink="/recommendation-form">Employee Connection</button>
+    </div>
+  </mat-card>
   
