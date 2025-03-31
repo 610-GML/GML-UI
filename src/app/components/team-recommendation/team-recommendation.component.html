@@ -1,0 +1,140 @@
+<!-- Main container with a modern dashboard layout -->
+<div class="dashboard-container">
+    <!-- Header section -->
+    <div class="header">
+        <div class="header-content">
+            <div class="icon-container">
+                <img src="assets/team-recommendation-icon.jpg" alt="Team Icon" class="header-icon">
+                <div class="icon-glow"></div>
+            </div>
+            <div class="header-text">
+                <h1>Team Recommendation</h1>
+                <p class="subtitle">Get GraphSAGE-powered team recommendations based on employee relationships and project requirements</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="error" class="alert alert-danger">
+        <i class="fas fa-exclamation-circle"></i>
+        {{ error }}
+    </div>
+
+    <!-- Loading indicator -->
+    <div *ngIf="loading" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <p>Generating team recommendations...</p>
+            <div class="loading-progress">
+                <div class="progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main content grid -->
+    <div class="dashboard-grid">
+        <!-- Left panel: Input form -->
+        <div class="input-panel">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-cog"></i>
+                    <h2>Project Requirements</h2>
+                </div>
+                <form [formGroup]="recommendationForm" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="branchId">
+                            <i class="fas fa-building"></i>
+                            Select Branch
+                        </label>
+                        <select id="branchId" formControlName="branchId" class="form-control">
+                            <option value="">Choose a branch...</option>
+                            <option *ngFor="let branch of branches" [value]="branch.id">
+                                {{ branch.name }}
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="projectType">
+                            <i class="fas fa-project-diagram"></i>
+                            Project Type
+                        </label>
+                        <select id="projectType" formControlName="projectType" class="form-control">
+                            <option value="">Select project type...</option>
+                            <option *ngFor="let type of projectTypes" [value]="type">{{ type }}</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="numTeams">
+                            <i class="fas fa-users"></i>
+                            Number of Teams
+                        </label>
+                        <select id="numTeams" formControlName="numTeams" class="form-control">
+                            <option *ngFor="let num of [1,2,3,4,5]" [value]="num">{{ num }}</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" [disabled]="!recommendationForm.valid || loading" class="submit-btn">
+                        <i class="fas fa-magic"></i>
+                        Get Recommendations
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Right panel: Results -->
+        <div class="results-panel">
+            <div *ngIf="teamRecommendations.length > 0" class="results-container">
+                <div class="results-header">
+                    <h2>Recommended Teams</h2>
+                    <div class="results-summary">
+                        <span class="total-teams">{{ teamRecommendations.length }} Teams Generated</span>
+                    </div>
+                </div>
+                <div class="teams-grid">
+                    <div *ngFor="let rec of teamRecommendations; let i = index" class="team-card">
+                        <div class="team-header">
+                            <div class="team-title">
+                                <i class="fas fa-users"></i>
+                                <h3>Team {{ i + 1 }}</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="team-stats">
+                            <div class="stat-item primary-stat">
+                                <i class="fas fa-chart-line"></i>
+                                <span class="stat-label">Predicted Performance Score</span>
+                                <span class="stat-value highlight">{{ rec.predicted_score | number:'1.2-2' }}</span>
+                            </div>
+                            <div class="stat-item secondary-stat">
+                                <i class="fas fa-bullseye"></i>
+                                <span class="stat-label">Project Type Matching Confidence</span>
+                                <span class="stat-value">{{ rec.project_type_probability | percent:'1.2-2' }}</span>
+                                <span class="stat-info">
+                                    <i class="fas fa-info-circle" title="Confidence level that this team composition matches the selected project type requirements (out of 23 project types)"></i>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="team-members">
+                            <h4><i class="fas fa-user-friends"></i> Team Members</h4>
+                            <ul>
+                                <li *ngFor="let member of rec.team_members" class="member-item">
+                                    <div class="member-info">
+                                        <span class="member-name">{{ member.employee_name }}</span>
+                                        <span class="member-title">{{ member.employee_title }}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="!loading && teamRecommendations.length === 0" class="empty-state">
+                <i class="fas fa-lightbulb"></i>
+                <p>Select your requirements and click "Get Recommendations" to see team suggestions.</p>
+            </div>
+        </div>
+    </div>
+</div>

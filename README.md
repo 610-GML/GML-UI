@@ -25,3 +25,48 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Team Recommendation Feature
+
+The Team Recommendation feature is an intelligent system that helps in forming optimal project teams based on various parameters. This feature provides data-driven recommendations for team composition to maximize project success.
+
+### Features
+
+- Dynamic team formation based on project requirements
+- Branch-specific recommendations
+- Project type consideration
+- Multiple team suggestions
+- Performance prediction scores
+
+### How to Use
+
+1. Select a branch from the dropdown menu
+2. Choose the project type
+3. Specify the number of team recommendations needed (1-5)
+4. Click submit to get team recommendations
+
+### Team Recommendation Details
+
+Each recommendation includes:
+
+- Team members with their details
+- Predicted performance score
+- Project type probability
+
+### Technical Implementation
+
+The feature is implemented using:
+
+- Angular Reactive Forms for user input
+- TypeScript interfaces for type safety
+- RESTful API integration
+- Modern UI components with responsive design
+
+### API Integration
+
+The feature communicates with a backend service to:
+
+- Fetch branch metadata
+- Get project type options
+- Retrieve team recommendations
+- Process user inputs
